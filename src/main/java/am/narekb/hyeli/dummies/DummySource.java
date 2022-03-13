@@ -3,10 +3,12 @@ package am.narekb.hyeli.dummies;
 public class DummySource {
     private String testStrField;
     private Integer testIntField;
+    private Float testFloatField;
 
-    public DummySource(String testStrField, int testIntField) {
+    public DummySource(String testStrField, Integer testIntField, Float testFloatField) {
         this.testStrField = testStrField;
         this.testIntField = testIntField;
+        this.testFloatField = testFloatField;
     }
 
     public String getTestStrField() {
@@ -17,11 +19,19 @@ public class DummySource {
         this.testStrField = testStrField;
     }
 
-    public int getTestIntField() {
+    public void setTestIntField(Integer testIntField) {
+        this.testIntField = testIntField;
+    }
+
+    public Integer getTestIntField() {
         return testIntField;
     }
 
-    public void setTestIntField(int testIntField) {
-        this.testIntField = testIntField;
+    public Float getTestFloatField() {
+        return testFloatField;
+    }
+
+    public void setTestFloatField(Float testFloatField) {
+        this.testFloatField = testFloatField;
     }
 }
