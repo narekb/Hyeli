@@ -1,24 +1,24 @@
 package am.narekb.hyeli;
 
-public class MapperBuilder<S, D> {
-    private final Mapper<S, D> mapper;
+public class MapperBuilder {
+    private final Mapper mapper;
 
     public MapperBuilder() {
-        this.mapper = new Mapper<S, D>();
+        this.mapper = new Mapper();
         this.mapper.setDebugMode(false);
         this.mapper.setConvention(new CamelCaseConvention());
     }
 
-    public Mapper<S, D> build() {
+    public Mapper build() {
         return this.mapper;
     }
 
-    public MapperBuilder<S, D> setDebugMode(boolean debugMode) {
+    public MapperBuilder setDebugMode(boolean debugMode) {
         this.mapper.setDebugMode(debugMode);
         return this;
     }
 
-    public MapperBuilder<S, D> addMapping(Mapping<S, D> mapping) {
+    public <S, D> MapperBuilder addMapping(Mapping<S, D> mapping) {
         this.mapper.addMapping(mapping);
         return this;
     }

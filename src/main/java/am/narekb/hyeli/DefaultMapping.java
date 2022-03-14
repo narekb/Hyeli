@@ -16,7 +16,7 @@ public class DefaultMapping<S, D> implements Mapping<S, D> {
     }
 
     @Override
-    public D map(S src, D dest) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public <F> D map(S src, D dest) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         // Step 1: Get all fields from sourceObj
         Class<S> sourceClass = (Class<S>) src.getClass();
         Class<D> destinationClass = (Class<D>) dest.getClass();
@@ -28,17 +28,17 @@ public class DefaultMapping<S, D> implements Mapping<S, D> {
             String getterMethodName = convention.getGetterName(f.getName());
             Method getterMethod = sourceClass.getMethod(getterMethodName);
 
-            Class<?> sourceFieldType = f.getType();
-            Object castedObj = sourceFieldType.cast(getterMethod.invoke(src));
+            Class<F> sourceFieldType = (Class<F>) f.getType();
+            F sourceField = sourceFieldType.cast(getterMethod.invoke(src));
 
             // Step 3: Invoke setter methods on destination object
             String setterMethodName = convention.getSetterName(f.getName());
             try {
-                Method setterMethod = destinationClass.getMethod(setterMethodName,  castedObj.getClass());
-                setterMethod.invoke(dest, castedObj);
+                Method setterMethod = destinationClass.getMethod(setterMethodName,  sourceFieldType);
+                setterMethod.invoke(dest, sourceField);
             } catch (NoSuchMethodException exception) {
                 // Ignore missing method.
-                log.warning("Setter method " + setterMethodName + " does not exist. Field is not mapped. Make sure you implement a custom mapping for this field.");
+                log.warning("Setter method " + setterMethodName + "(" + sourceFieldType.getName() + ")" + " does not exist. Field is not mapped. Make sure you implement a custom mapping for this field.");
             }
         }
         return dest;

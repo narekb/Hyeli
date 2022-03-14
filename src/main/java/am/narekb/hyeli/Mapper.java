@@ -9,23 +9,24 @@ import java.util.List;
 // Type variables
 // S = Source
 // D = Destination
-// F = Field type
 @Log
-public class Mapper<S, D> {
+public class Mapper {
     private CodeConvention convention;
-    private List<Mapping<S, D>> mappings = new ArrayList<>();
+    private List<Mapping<?, ?>> mappings = new ArrayList<>();
     private boolean debugMode;
 
     public Mapper() {
     }
 
-    public D map(S sourceObj, Class<D> destinationClass) {
+    @SuppressWarnings("unchecked")
+    public <S, D> D map(S sourceObj, Class<D> destinationClass) {
         D mappedObject = null;
-        mappings.add(new DefaultMapping<>(convention));
+        mappings.add(new DefaultMapping<S, D>(convention));
         try {
             mappedObject = destinationClass.getDeclaredConstructor().newInstance();
-            for(Mapping<S, D> mapping: mappings) {
-                mappedObject = mapping.map(sourceObj, mappedObject);
+            for(Mapping<?, ?> mapping: mappings) {
+                // Is it fine to explicitly cast Mapping<?, ?> to Mapping<S, D>?
+                mappedObject = ((Mapping<S, D>) mapping).map(sourceObj, mappedObject);
             }
 
         } catch (Exception e) {
@@ -47,7 +48,7 @@ public class Mapper<S, D> {
         this.debugMode = debugMode;
     }
 
-    public void addMapping(Mapping<S, D> mapping) {
+    public <S, D> void addMapping(Mapping<S, D> mapping) {
         this.mappings.add(mapping);
     }
 }

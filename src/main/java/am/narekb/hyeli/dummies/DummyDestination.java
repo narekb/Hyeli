@@ -1,9 +1,11 @@
 package am.narekb.hyeli.dummies;
 
+import java.util.Date;
+
 public class DummyDestination {
     private String testStrField;
     private Integer testIntField;
-    private Float someOtherFloatField;
+    private Date testFloatField;
 
     public String getTestStrField() {
         return testStrField;
@@ -21,11 +23,19 @@ public class DummyDestination {
         this.testIntField = testIntField;
     }
 
-    public Float getSomeOtherFloatField() {
-        return someOtherFloatField;
+    public Date getTestFloatField() {
+        return testFloatField;
     }
 
-    public void setSomeOtherFloatField(Float someOtherFloatField) {
-        this.someOtherFloatField = someOtherFloatField;
+    public void setTestFloatField(Date testFloatField) {
+        this.testFloatField = testFloatField;
     }
+
+    //    public Date getSomeOtherFloatField() {
+//        return someOtherFloatField;
+//    }
+//
+//    public void setSomeOtherFloatField(Date someOtherFloatField) {
+//        this.someOtherFloatField = someOtherFloatField;
+//    }
 }

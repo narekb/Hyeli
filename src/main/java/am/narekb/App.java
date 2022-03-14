@@ -2,7 +2,6 @@ package am.narekb;
 
 import am.narekb.hyeli.Mapper;
 import am.narekb.hyeli.MapperBuilder;
-import am.narekb.hyeli.Mapping;
 import am.narekb.hyeli.dummies.DummyDestination;
 import am.narekb.hyeli.dummies.DummySource;
 
@@ -10,15 +9,12 @@ public class App
 {
     public static void main( String[] args )
     {
-
-        Mapping<DummySource, DummyDestination> dummyMapping = (src, dest) -> {
-            dest.setSomeOtherFloatField(src.getTestFloatField());
-            return dest;
-        };
-
-        Mapper<DummySource, DummyDestination> mapper = new MapperBuilder<DummySource, DummyDestination>()
+        Mapper mapper = new MapperBuilder()
                 .setDebugMode(true)
-                .addMapping(dummyMapping)
+//                .addMapping((DummySource src, DummyDestination dest) -> {
+//                    dest.setSomeOtherFloatField(src.getTestFloatField());
+//                    return dest;
+//                })
                 .build();
 
         DummySource source = new DummySource("Test String", 13, 1.3f);
