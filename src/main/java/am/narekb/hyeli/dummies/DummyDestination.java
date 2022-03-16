@@ -1,11 +1,12 @@
 package am.narekb.hyeli.dummies;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class DummyDestination {
     private String testStrField;
     private Integer testIntField;
-    private Date testFloatField;
+    private LocalDate testFloatField;
 
     public String getTestStrField() {
         return testStrField;
@@ -23,19 +24,13 @@ public class DummyDestination {
         this.testIntField = testIntField;
     }
 
-    public Date getTestFloatField() {
+    public LocalDate getTestFloatField() {
         return testFloatField;
     }
 
-    public void setTestFloatField(Date testFloatField) {
+    public void setTestFloatField(LocalDate testFloatField) {
         this.testFloatField = testFloatField;
     }
 
-    //    public Date getSomeOtherFloatField() {
-//        return someOtherFloatField;
-//    }
-//
-//    public void setSomeOtherFloatField(Date someOtherFloatField) {
-//        this.someOtherFloatField = someOtherFloatField;
-//    }
+
 }

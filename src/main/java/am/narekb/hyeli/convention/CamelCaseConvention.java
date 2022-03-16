@@ -1,4 +1,4 @@
-package am.narekb.hyeli;
+package am.narekb.hyeli.convention;
 
 public class CamelCaseConvention implements CodeConvention{
     private final String GETTER_PREFIX = "get";
@@ -6,9 +6,9 @@ public class CamelCaseConvention implements CodeConvention{
     private final String SETTER_PREFIX = "set";
 
     @Override
-    public String getGetterName(String fieldName) {
+    public String getGetterName(String fieldName, boolean isBoolean) {
         // field --> getField
-        return GETTER_PREFIX + upperCase(fieldName);
+        return isBoolean ? IS_PREFIX + upperCase(fieldName) : GETTER_PREFIX + upperCase(fieldName);
     }
 
     @Override
