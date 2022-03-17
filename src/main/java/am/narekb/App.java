@@ -4,8 +4,6 @@ import am.narekb.hyeli.MapperBuilder;
 import am.narekb.hyeli.dummies.DummyDestination;
 import am.narekb.hyeli.dummies.DummySource;
 
-
-import java.util.Date;
 import java.time.LocalDate;
 
 public class App 
@@ -15,10 +13,10 @@ public class App
         DummySource source = new DummySource("Test String", 13, 1.3f);
         DummyDestination dest = MapperBuilder
                 .init(source, DummyDestination.class)
-                .setConverter("testFloatField", sf -> {
-                    return LocalDate.now();
-                })
+                .setConverter("testFloatField", sf -> LocalDate.now())
+                .addMapping("testStrField",
+                        source1 -> source1.getTestStrField(),
+                        (destObj, field) -> destObj.setTestStrField(field))
                 .map();
-
     }
 }

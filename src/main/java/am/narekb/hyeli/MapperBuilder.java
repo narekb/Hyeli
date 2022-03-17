@@ -1,32 +1,13 @@
 package am.narekb.hyeli;
 
+import am.narekb.hyeli.convention.CamelCaseConvention;
+
 public class MapperBuilder {
-    private final Mapper mapper;
+    private MapperBuilder() {}
 
-    public MapperBuilder() {
-        this.mapper = new Mapper();
-        this.mapper.setDebugMode(false);
-        this.mapper.setConvention(new CamelCaseConvention());
+    public static <S, D> Mapper<S, D> init(S srcObj, Class<D> destClass) {
+        Mapper<S, D> mapper = new Mapper<>(srcObj, destClass);
+        mapper.setConvention(new CamelCaseConvention());    // Default convention is camelcase
+        return mapper;
     }
-
-    public Mapper build() {
-        return this.mapper;
-    }
-
-    public MapperBuilder setDebugMode(boolean debugMode) {
-        this.mapper.setDebugMode(debugMode);
-        return this;
-    }
-
-    public <S, D> MapperBuilder addMapping(Mapping<S, D> mapping) {
-        this.mapper.addMapping(mapping);
-        return this;
-    }
-
-    /* Template for all subsequent methods
-    public MapperBuilder setSomething() {
-        // Do something
-        return this;
-    }
-     */
 }

@@ -6,13 +6,10 @@ import am.narekb.hyeli.function.SetterFunction;
 import lombok.extern.java.Log;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Log
 @SuppressWarnings("unchecked")
@@ -95,7 +92,7 @@ public class Mapper<S, D> {
         return this;
     }
 
-    public <SF, DF> Mapper<S, D> addMapping(String fieldName,
+    public <SF, DF extends SF> Mapper<S, D> addMapping(String fieldName,
                                     GetterFunction<S, SF> getter,
                                     SetterFunction<D, DF> setter) {
 
